@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Scanner;
 
 public class FileParser {
 
@@ -14,9 +15,19 @@ public class FileParser {
 	 * @author Hayat MOUINE
 	 */
 	
-	public void parse(File file, IContentHandler handler){
+public void parse(File file,String format, IContentHandler handler){
 		
 		try{
+			Scanner f=new Scanner(new File(format));
+			while(f.hasNext()){
+				String l=f.nextLine();
+				if (l.contains("comment"))
+				{
+					format=l.substring(l.indexOf("\"")+1,l.indexOf("\"",l.indexOf("\"")+1));
+					
+			break;
+			}
+			}
 			InputStream ips=new FileInputStream(file); 
 			InputStreamReader ipsr=new InputStreamReader(ips);
 			BufferedReader br=new BufferedReader(ipsr);
@@ -24,7 +35,7 @@ public class FileParser {
 			while ((ligne=br.readLine())!=null){
 				handler.defaultLine(ligne);
 			
-				if (ligne.startsWith("#")){
+				if (ligne.startsWith(format)){
 					
 					handler.commentLine(ligne);
 					
@@ -40,5 +51,4 @@ public class FileParser {
 	
 	
 	}
-
 }
