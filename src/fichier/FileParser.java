@@ -11,7 +11,7 @@ public class FileParser {
 	/**
 	 * @param file est un fichier pour effectuer le traitement
 	 * @param handler de type IContentHandler pour executer des actions
-	 * 
+	 * @author Hayat MOUINE
 	 */
 	
 	public void parse(File file, IContentHandler handler){
