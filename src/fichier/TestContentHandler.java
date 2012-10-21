@@ -18,7 +18,7 @@ public class TestContentHandler  implements IContentHandler{
 	
 	@Override
 	public void defaultLine(String content) {
-		//System.out.println("nouvelle ligne : " + content);
+		
 		compteurL++;
 	}
 

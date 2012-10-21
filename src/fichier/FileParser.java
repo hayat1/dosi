@@ -9,7 +9,9 @@ import java.io.InputStreamReader;
 public class FileParser {
 
 	/**
-	 * @param args
+	 * @param file est un fichier pour effectuer le traitement
+	 * @param handler de type IContentHandler pour executer des actions
+	 * 
 	 */
 	
 	public void parse(File file, IContentHandler handler){
