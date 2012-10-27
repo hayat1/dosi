@@ -10,14 +10,15 @@ public class TestContentHandler  implements IContentHandler{
 	public static  void main(String[] args){
 		File fichier = new File("fichiertexte.txt");
 		FileParser f=new FileParser();
-		f.parse(fichier,"config.yaml", new TestContentHandler());
+		f.parse(fichier, new TestContentHandler());
 		System.out.println("le fichier "+ fichier +" contient "+ compteurL+ " ligne(s) dont "+compteurC+ " de commentaires.");
 	}
 	
-	
+
+	// implémentation de contentHandler qui affiche le nombre de ligne
 	@Override
 	public void defaultLine(String content) {
-		
+		//System.out.println("nouvelle ligne : " + content);
 		compteurL++;
 	}
 
