@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Compilation d'ElementZ" default="compile" basedir="." >
+
+	<property name="src.dir" value="src" />
+	<property name="bin.dir" value="bin" />
+	<property name="doc.dir" value="doc" />
+	<property name="target.name" value="ElementZ.jar" />
+	<property name="main-class" value="org.ubo.elementz.Application_Jeu" />
+	<property name="compile.classpath" value="libs/eventbus-1.4.jar" />
+	<property name="runtime.classpath" value="libs/eventbus-1.4.jar" />
+	<!-- Tests -->
+	<property name="test.dir" value="test" />
+	<property name="bin.test.dir" value="bin-test" />
+	<property name="test.results.dir" value="test-results" />
+	<property name="test.reports.dir" value="test-reports" />
+	<property name="test.classpath" value="${bin.dir}:libs/junit-4.8.2.jar:libs/eventbus-1.4.jar" />
+	
+	
+	<!-- Supprime les fichiers créés pendant la compilation -->
+	<target name="clean" description="Clean build directories">
+		<echo message= "Suppression des fichiers issus de la compilation" />
+		<delete dir="${bin.dir}"/>
+		<delete dir="${bin.test.dir}"/>
+		<delete dir="${test.results.dir}"/>
+		<delete dir="${doc.dir}"/>
+	</target>
+
+	<!-- Compilation du projet -->
+	<target name="compile" depends="clean" >
+		<mkdir dir="${bin.dir}" />
+		<javac srcdir="${src.dir}"
+			destdir="${bin.dir}"
+			classpath="${compile.classpath}"
+			source="1.6"
+			fork="true" />
+	</target>
+
+	<!-- Création d'un jar exécutable. -->
+	<target name="jar" depends="clean, compile" >
+		<jar destfile="${target.name}">
+			<fileset dir="${bin.dir}" />
+			<manifest>
+				<attribute name="Main-Class" value="${main-class}" />
+				<attribute name="Class-Path" value="${runtime.classpath}" />
+			</manifest>
+		</jar>
+	</target>
+
+	<!-- Compilation des tests -->
+	<target name="compile-test" depends="clean, compile" >
+		<mkdir dir="${bin.test.dir}" />
+		<javac srcdir="${test.dir}"
+			destdir="${bin.test.dir}"
+			classpath="${test.classpath}"
+			source="1.6"
+			fork="true" />
+	</target>
+
+	
+	<!-- Génération de la documentation -->
+	<target name="doc" depends="compile">
+		<javadoc sourcepath="${src.dir}"
+			classpath="${compile.classpath}"
+			destdir="${doc.dir}"
+			author="true"
+			version="true"
+			encoding="UTF-8"
+			docencoding="UTF-8"
+			charset="UTF-8">
+		</javadoc>
+	</target>
+
+	
+
+</project>
