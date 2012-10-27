@@ -24,16 +24,9 @@ public void parse(File file, IContentHandler handler){
 		String ligne;
 		while ((ligne=br.readLine())!=null){
 			handler.defaultLine(ligne);
-		
-			if (ligne.startsWith("#")){
-				
-				handler.commentLine(ligne);
-				
-			}	
-			
+			handler.commentLine(ligne);
 		}
 		br.close(); 
-		
 	}
 	catch (Exception e){
 		System.out.println(e.toString());
