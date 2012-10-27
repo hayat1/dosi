@@ -1,37 +1,21 @@
 package fichier;
 
-import java.io.File;
+import java.io.FileNotFoundException;
 
-public class TestContentHandler  implements IContentHandler{
+public class TestContentHandler {
 
+	public static void main(String[] args) throws FileNotFoundException {
+		FileParser f = new FileParser();
 
-	static int compteurL = 0;
-	static int compteurC = 0;
-	public static  void main(String[] args){
-		File fichier = new File("fichiertexte.txt");
-		FileParser f=new FileParser();
-		
-		f.parse(fichier ,"config.yaml",new TestContentHandler());
-		System.out.println("le fichier "+ fichier +" contient "+ compteurL+ " ligne(s) dont "+compteurC+ " de commentaires.");
+		System.out.println("Verification du fichier '" + args[0]
+				+ "' en argument...");
+
+		if (f.check_xml(args[0]))
+			System.out.print("C'est bien ");
+		else
+			System.out.print("Ce n'est pas ");
+
+		System.out.println("un fichier XML");
+
 	}
-	
-
-	
-	@Override
-	public void defaultLine(String content) {
-		//System.out.println("nouvelle ligne : " + content);
-		compteurL++;
-	}
-
-
-
-	@Override
-	public void commentLine(String comment) {
-		// TODO Auto-generated method stub
-		
-		compteurC ++;
-		
-	
-	}
-
 }
